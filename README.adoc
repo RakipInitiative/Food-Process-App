@@ -1,0 +1,88 @@
+= BfR Food Process-Modeler
+A JavaScript-based web editor for food processing chains
+:icons: font
+:toc:
+
+== Introduction
+This project enables arbitrary users to build and commit their food process chains in a unified web application. The application is a pure JavaScript-client based on _JavaScript ES6_ footnote:[http://www.ecma-international.org/ecma-262/6.0/index.html] using the libraries _JointJS_ footnote:[http://jointjs.com/], _Backbone.js_ footnote:[http://backbonejs.org/], _jQuery_ footnote:[https://jquery.com/], and _Foundation Sites 6_ footnote:[http://foundation.zurb.com/sites/docs/]. The purpose of each library is as follows:
+
+Joint.js:: library for individual modeling of graphs, workflows and processes
+Backbone.js:: JavaScript-MVC framework that works natively with Joint.js
+jQuery:: JavaScript library mainly used by Backbone.js
+Foundation Sites 6:: GUI component framework used for interactive elements and icons
+
+== Technical Requirements
+This project uses _npm_ footnote:[https://www.npmjs.com/] for package management and _webpack_ footnote:[https://webpack.github.io/] as a bundler tool. For both development and production, you need to make sure that npm can be run on the machine you are using. Read more on how to install npm http://blog.npmjs.org/post/85484771375/how-to-install-npm[here].
+
+npm will install all necessary packages and requirements for the project. Once it is available, you just need to run
+
+[source,npm]
+----
+npm install
+----
+from the root-folder (the one that contains the `package.json` file) and the project is ready to go.
+
+== Files & Folders
+On your first checkout of the repository, you will find a `src` folder and several files in the root folder. Once you have run npm for the first time, an additional `node_modules` folder will appear. Eventually, after the first build, a `dist` folder is created. The meaning and objective of all these files and folders is as follows:
+
+src/:: contains all source code files
+dist/:: contains the production files and bundle
+node_modules/:: contains all packages and libraries installed and managed via npm
+package.json:: configuration file for npm which contains the name and version of all necessary packages
+webpack.config.json:: configuration file for webpack which is responsible for the development workflow and the build process
+config.json:: administrative configuration values that are read by the application on startup
+index.html:: the main html page of the application which also loads the main JavaScript bundle
+README.adoc:: AsciiDoctor source file for this documentation
+README.html:: this documentation
+
+=== JavaScript Organization
+
+For maintenance and extension of the application you will mostly work on the files in the `src` folder and the root folder. The source code files are organized in six subfolders:
+
+src/cv/:: contains the "controlled vocabularies" as csv files
+src/fonts/:: contains the application fonts
+src/img/:: contains images and logos, that are not provided by other libraries
+src/js/:: contains all JavaScript code and therefore the main logic of the application
+src/scss/:: contains the style sheet source files (Sassy CSS)
+src/templates/:: contains the html templates used by the JavaScript
+
+=== Backbone.js Views and Models
+The `js` folder contains two subfolders, `views` and `models`, as well as an `index.jsx`. The subfolders contain Backbone.js views and models, respectively. The `index.jsx` is the entry point of the application. Some files in the `models` folder contain additional defintions of necessary collections and classes. For example, `collection.jsx` defines and exports a custom Backbone.js collection.
+
+[TIP]
+The JavaScript source files are all suffixed with ".jsx" for upwards compatibility. However, they only contain native ES6-JavaScript.
+
+The `views` and `models` folders contain another `index.jsx` each (`views/index.jsx` and `models/index.jsx`). These two files provide a common access point to all definitions of the JavaScript-files in the respective folder. For the sake of this convention, new definitions have to be added to the respective `index.jsx`. This concept allows a convenient method to import the defined objects etc., because you can directly import from the respective `index.jsx`. For example, the `properties.jsx` needs a TimetableView and imports it like this:
+
+[source,JavaScript]
+----
+import {TimetableView} from './index.jsx'
+----
+
+=== SCSS Organization
+The `scss` folder and its `import` subfolder contain all style sheet definitions. All scss-files in the `import` folder contain either definitions that correspond directly to a view, or definitions that are shared among the application. The only purpose of the remaining `main.scss` is to import and connect all definitions from all scss-files and therefore make the compiled style sheets available to the application.
+
+== Development Environment
+For the development workflow, we make usage of _webpack_. You can easily setup your development environment using webpack by executing the following command:
+
+[source,npm]
+----
+npm run start
+----
+
+This will start the script aliased with "start" (see `package.json`). This script starts a preconfigured webpack-dev-server, initializes hot replacement for file changes, and deploys the current application on http://localhost:8080.
+
+== Build & Deploy
+If you want to build a new version from the current sources you simply need to run
+
+[source,npm]
+----
+npm run build.prod
+----
+
+which starts a build script. It triggers the webpack build chain and puts the results in the `dist` folder. The combination of that folder plus the `index.html` comprise the full application, ready for deploy.
+
+[TIP]
+The index.html does not need to be changed.
+
+

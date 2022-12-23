@@ -1,0 +1,84 @@
+.workspace {
+    z-index: 10;
+    position: relative;
+    float: left;
+    overflow: hidden;
+    min-width: 100px;
+    cursor: move; // fallback
+    cursor: grab;
+}
+
+    .node-body {
+        stroke: $nodeBorderColor;
+        fill: $nodeBackgroundColor;
+        shape-rendering: auto;
+        
+        &.active {
+            outline: 2px auto $nodeOutlineColor;
+            fill: $nodeActiveColor;
+        }
+    }
+
+        .node-content {
+            position: absolute;
+            background: transparent;
+            pointer-events: none;
+            user-select: none;
+            padding: 15px;
+            box-sizing: border-box;
+            color: $nodeContentColor;
+
+            &.food-process {
+                padding-left: 14px;
+            }
+
+            &.end-product {
+                padding-left: 16px;
+            }
+        }
+
+    .node-port {
+        stroke: none;
+        fill: $nodePortColor;
+
+        &:hover, &:active, &:focus {
+            cursor: grab;
+            stroke: $nodePortHoverColor;
+            outline: none;
+            stroke-width: 2;
+        }
+    }
+
+    .label {
+        word-break: break-all;
+        width: 10px;
+    }
+
+
+.joint-highlight-stroke {
+    stroke: $nodePortHoverColor;
+    stroke-width: 3;
+    shape-rendering: auto;
+}
+
+.connection {
+    stroke: $linkStrokeColor;
+    shape-rendering: auto;
+}
+
+.connection-wrap {
+    opacity: 0 !important;
+}
+
+.marker-arrowheads {
+    display: none;
+}
+
+.joint-link.joint-theme-default .link-tools .tool-remove circle {
+    fill: #ec5840;
+}
+
+.joint-paper { 
+    height: 100%;
+    width: 100%
+}; 

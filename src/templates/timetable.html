@@ -1,0 +1,13 @@
+<div class="reveal timetable tiny" id="timetableModal<%= nodeId %><%= model.get('id') %>" data-reveal>
+    <h4>Timetable</h4>
+    <button class="close-button" data-close aria-label="Close modal" type="button">
+        <i class="fa fa-times" aria-hidden="true"></i>
+    </button>
+    <div id="timetableListSection<%= model.get('id') %>"></div>
+    <button type="button" id="addTimetableListButton" class="button expanded last" title="">Add Value</button>
+    <br/>
+    <label for="uploadFromCSV" class="button secondary expanded last">
+        <i class="fa fa-upload" aria-hidden="true"></i> Load from CSV
+    </label>
+    <input type="file" id="uploadFromCSV" class="show-for-sr">
+</div>

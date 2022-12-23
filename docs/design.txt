@@ -1,0 +1,14 @@
+CHANGES
+* any change triggers an event that instantly persists the new input
+    example: user types in process name -> key stroke -> save event
+    example: node is moved -> mouse is released -> save event
+
+WORKSPACE
+* the user can edit/translate the view via horizontal and vertical scroll bars
+    example: elements are out of view/behind side menu -> user scrolls
+* the user can use the mousewheel to zoom in and zoom out
+* the workspace has a fixed minimum width and height. The height and width grows if a user places an element close to the border or outside of the workspace.
+
+LAYOUT
+* menu and properties have a fixed width
+* menu, properties and workspace are always visible - even if empty

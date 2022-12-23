@@ -1,0 +1,28 @@
+.controls-area {
+    padding: 1.5em;
+    flex-grow: 0;
+    flex-shrink: 0;
+    border-top: 1px solid $borderColor;
+
+    .button-row {
+        display: flex;
+        flex-flow: row nowrap;
+
+        .button {
+            flex-shrink: 0;
+
+            &:first-child {
+                flex-grow: 1;
+                margin-right: 2px;
+            }
+        }
+    }
+
+    .button {
+        margin-bottom: .4rem;
+    }
+
+    #reloadWorkflow {
+        margin-top: 5px;
+    }
+}

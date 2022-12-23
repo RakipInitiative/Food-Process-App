@@ -1,0 +1,27 @@
+<div class="ingredients-area">
+    <h4>Ingredients</h4>
+
+    <form class="properties-form" data-abide novalidate>
+        <% let chosenIngredients = model.get('ingredients').models %>
+        <% _.each(chosenIngredients, function (ingredient) { %>
+            <div class="property-row">
+                <label class="ingredient-name" id="ingredientNameInput<%= ingredient.id %>" value="<%= ingredient.id %>" title="<%= ingredient.get('name') %>"><%= ingredient.get('name') %></label>
+                <input type="text" id="ingredientAmountInput<%= ingredient.get('id') %>" class="ingredient-amount" placeholder="" aria-describedby="amount" required>
+                <select class="property-unit small" id="ingredientUnitSelect<%= ingredient.get('id') %>">
+                    <% _.each(allUnits, function(unitOption) { %>
+                    <option value="<%= unitOption.id %>"><%= unitOption.name %></option>
+                    <% }); %>
+                </select>
+            </div>
+        <% }); %>
+    </form>
+</div>
+
+<div class="controls-area">
+    <button type="button" id="selectIngredient" data-open="ingredientModal<%= model.cid %>" class="primary button property-button expanded last" title="Choose Available Ingredients">
+        <i class="fa fa-leaf" aria-hidden="true"></i>
+        Choose Ingredients
+    </button>
+    <button type="button" id="deleteNodeButton" class="alert button expanded last" title="Delete the selected Ingredients">Delete Node</button>
+    <div id="ingredientTreeWidget<%= model.cid %>"></div>
+</div>

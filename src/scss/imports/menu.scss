@@ -1,0 +1,54 @@
+.menu {
+    width: 205px;
+    float: left;
+    background-color: $sideBackgroundColor;
+    position: relative;
+    z-index: 100;
+    border-right: 1px solid $borderColor;
+    box-shadow: 1px 0 4px $shadowColor;
+
+    display: flex;
+    flex-flow: column nowrap;
+    overflow: auto;
+}
+
+    .settings-area {
+        padding: 1.5rem;
+        border-bottom: 1px solid $borderColor;
+
+        .bfr-logo {
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        .settings-button {
+            margin-bottom: 10px;
+        }
+    }
+
+    .nodes-area {
+        padding: 1.5rem;
+        flex-grow: 2;
+        overflow: auto;
+        min-height: 80px;
+
+        .nodes-library {
+            background-color: transparent !important;
+
+            svg {
+                .node-port {
+                    pointer-events: none;
+                }
+            }
+        }
+    }
+
+
+
+            .flyingNode {
+                position: fixed;
+                z-index: 100;
+                opacity: .7;
+                pointer-events: none;
+                background-color: transparent !important;
+            }
