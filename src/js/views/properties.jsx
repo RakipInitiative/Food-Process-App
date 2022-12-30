@@ -489,10 +489,9 @@ export let PropertiesView = Backbone.View.extend({
         
 
         self.$el.find('#removeOldWorkflowFile').on('click', function() {
-            const fileId = metanodeData.models[0].get('file').id;
             // remove current file with a placeholder
             metanodeData.models[0].set('file',  {
-                id: fileId,
+                id: '',
                 filename: "",
                 data: null
               }
@@ -590,6 +589,7 @@ export let PropertiesView = Backbone.View.extend({
                     }
                     // set file field of the metanode model
                     data.set('file', file);
+                    data.set('name', filename);
                     // set file name in html
                     self.$el.find('.upload-workflow-download').text(filename);
                     // reveal div
