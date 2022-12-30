@@ -3,11 +3,10 @@
     <button type="button" id="settingsButton" data-open="settingsModal" class="button expanded settings-button" title="Open settings">
         <i class="fa fa-cog" aria-hidden="true"></i> Metadata
     </button>
-
-    <label for="uploadCustomIngredients" class="button secondary last" title="Upload a custom ingredients file">
-        <i class="fa fa-leaf" aria-hidden="true"></i>  Ingredients
-    </label>
-    <input type="file" id="uploadCustomIngredients" class="show-for-sr">
+    <button type="button" id="customSettingsArea" data-open="customSettings" class="button expanded secondary last" title="Upload a custom ingredients file">
+        <i class="fa fa-leaf" aria-hidden="true"></i>  
+        Settings
+    </button>
     <form data-abide novalidate>
         <label>Workflow Name
             <input type="text" id="workflowNameInput" placeholder="" aria-describedby="name" required>
@@ -34,7 +33,7 @@
     <input type="file" id="uploadInput" class="show-for-sr">
     <div class="reloadWorkflowArea">
         <a type="button" id="reloadWorkflow" class="button secondary" title="Reload Workflow">
-            <i class="fa fa-rotate-right" aria-hidden="true"></i> Reload Workflow 
+            <i class="fa fa-rotate-right" aria-hidden="true"></i> Back To Parent 
         </a>
         <a type="button" id="saveWorkFlowProgress" class="button primary" title="Save changes to Subworkflow">
             <i class="fa fa-floppy-disk" aria-hidden="true"></i> Save Subworkflow
@@ -43,6 +42,7 @@
 </div>
 
 <div id="settings"></div>
+<div id="customSettingsArea<%= model.cid %>"></div>
 <div id="sendToAPIModal" class="reveal" data-reveal>
     <label>Send the model to the following URL:
         <input type="text" id="sendToAPIURL" placeholder="" value="<%= url %>" required>

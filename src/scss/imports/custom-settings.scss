@@ -1,0 +1,21 @@
+.custom-ingredients-file-section {
+
+    .custom-ingredient-file {
+        margin-right: 5px;
+    }
+    
+    .removeCustomIngredientFile {
+        margin-left: 0.1rem;
+        flex-shrink: 0;
+        height: 2.4375rem;
+    }
+
+    .property-row {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        border-bottom: 1px solid;
+        margin-bottom: 5px;
+    }
+
+}

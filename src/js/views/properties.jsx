@@ -23,6 +23,7 @@ let ingredientsCV = require('../../cv/ingredients.csv');
 let processNamesCV = require('../../cv/processes.csv');
 let parameterNamesCV = require('../../cv/parameters.csv');
 let unitsCV = require('../../cv/units.csv');
+let foodOnIngredientJSON = require('../../json/foodex.json')
 
 export let PropertiesView = Backbone.View.extend({
     ingredients: [],
@@ -140,6 +141,7 @@ export let PropertiesView = Backbone.View.extend({
                     ingredientTreeWidgetModal.render();                    
                 }
                 this.selectIngredientDropdownListener();
+                this.addAmountAndUnitListener();
                 this.stickit();
                 this.$el.foundation();
 
@@ -190,7 +192,7 @@ export let PropertiesView = Backbone.View.extend({
                 this.addUploadWorflowFromJSONListener();
                 this.toggleFileDownloadArea();
                 this.addDownloadFileListener();
-                this.loadOldWorkflowFileListener();
+                this.loadSubWorkflowFileListener();
                 this.removeOldWorkflowFile();
                 this.stickit();
                 this.$el.foundation();
@@ -262,8 +264,10 @@ export let PropertiesView = Backbone.View.extend({
                     let ingredientsLabel = '';
                     const ingredients = propertiesModel.get('ingredients');
                     let numberOfIngredients = ingredients.length;
-                    ingredients.forEach(ingredient => {
-                        ingredientsLabel +=  ingredient.get('name') + '\n'
+                    ingredients.forEach(ingredient => { 
+                        if(ingredient.get('name')) {
+                            ingredientsLabel +=  ingredient.get('name') + '\n';
+                        }
                     });
                     // set label text
                     currentNode.setName(ingredientsLabel);
@@ -376,19 +380,6 @@ export let PropertiesView = Backbone.View.extend({
         // trigger event
         this.model.get('ingredients').trigger('change:value');
     },
-    addIngredient: function() {
-        let ingredientsCollection = this.model.get('ingredients');
-        let idString = "Ingredient";
-        let idNumber = 0;
-        if (ingredientsCollection.size()) {
-            idNumber = parseInt(ingredientsCollection.at(ingredientsCollection.size() - 1).get('id').replace(idString, '')) + 1;
-        }
-        ingredientsCollection.add(new IngredientModel({
-            id: idString + idNumber,
-            value: this.ingredients[0].id
-        }));
-        this.render();
-    },
     selectIngredientDropdownListener: function() {
         let self = this;
         const ingredientFiles = this.model.get('customIngredientFiles');
@@ -399,15 +390,41 @@ export let PropertiesView = Backbone.View.extend({
             if(selectIngredients.length === 0) {
                 selectIngredients = self.$el.find('.ingredient-select');
             }
-
             // remove options from dropdown
             selectIngredients.find('option').remove().end();
             // append first default
             selectIngredients.append($("<option />").val("default").text("default"));
+            selectIngredients.append($("<option />").val("FoodOn").text("FoodOn"));
             // append files
             ingredientFiles.forEach(ingredient => {
                 selectIngredients.append($("<option />").val(ingredient.filename).text(ingredient.filename));
             });
+        });
+    },
+    addAmountAndUnitListener: function() {
+        let ingredients = this.model.get('ingredients').models;
+        let self = this;
+
+        self.$el.find('.ingredient-amount').on('keyup', function() {
+            // get ingredient id
+            let ingredientId = $(this).parent().find('label').attr("value");
+            
+            for(let i=0; i< ingredients.length; i++) {
+                if(ingredients[i].id === ingredientId) {
+                    ingredients[i].set('amount', $(this).val());
+                }
+            }
+        });
+
+        self.$el.find('.property-unit').on('change', function() {
+            // get ingredient id
+            let ingredientId = $(this).parent().find('label').attr("value");
+            
+            for(let i=0; i< ingredients.length; i++) {
+                if(ingredients[i].id === ingredientId) {
+                    ingredients[i].set('unit', $(this).val());
+                }
+            }
         });
     },
     addEndProductBinding: function() {
@@ -447,10 +464,13 @@ export let PropertiesView = Backbone.View.extend({
         let metanodeData = this.model.get('metanodeData');
         let data = metanodeData.models[0];
 
+        // hide or reveal the areas based on the file's existence 
         if(!data.get('file').filename || !data.get('file').filename.length === 0) {
             self.$el.find('.uploaded-file-download-area').hide();
+            self.$el.find('.upload-subworkflow-area').show();
         } else {
             self.$el.find('.uploaded-file-download-area').show();
+            self.$el.find('.upload-subworkflow-area').hide();
         }
     },
     addDownloadFileListener: function() {
@@ -481,7 +501,7 @@ export let PropertiesView = Backbone.View.extend({
             self.toggleFileDownloadArea();
         });
     },
-    loadOldWorkflowFileListener: function() {
+    loadSubWorkflowFileListener: function() {
         // convert the workspacegraph to a json object
         let exportJSON = this.workspaceGraph.toJSON();
         let self = this;

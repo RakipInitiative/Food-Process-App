@@ -5,7 +5,7 @@
         <% let chosenIngredients = model.get('ingredients').models %>
         <% _.each(chosenIngredients, function (ingredient) { %>
             <div class="property-row">
-                <label class="ingredient-name" id="ingredientNameInput<%= ingredient.id %>" value="<%= ingredient.id %>" title="<%= ingredient.get('name') %>"><%= ingredient.get('name') %></label>
+                <label class="ingredient-name" id="ingredientValueSelect<%= ingredient.id %>" value="<%= ingredient.id %>" title="<%= ingredient.get('name') %>"><%= ingredient.get('name') %></label>
                 <input type="text" id="ingredientAmountInput<%= ingredient.get('id') %>" class="ingredient-amount" placeholder="" aria-describedby="amount" required>
                 <select class="property-unit small" id="ingredientUnitSelect<%= ingredient.get('id') %>">
                     <% _.each(allUnits, function(unitOption) { %>

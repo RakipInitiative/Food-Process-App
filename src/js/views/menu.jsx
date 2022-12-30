@@ -12,7 +12,7 @@ let platform = require('platform');
 let menuTemplate = require('../../templates/menu.html');
 
 import { FoodProcessNode, IngredientsNode, nodeConfig, MetadataModel, EndNode, MetaNode, nodeTypes}  from '../models/index.jsx';
-import { SettingsView } from './index.jsx';
+import { SettingsView, CustomSettingsAreaView } from './index.jsx';
 
 let configJSON = require('../../../config.json');
 
@@ -51,7 +51,6 @@ export let MenuView = Backbone.View.extend({
         this.workspaceGraph.set('menu', this);
         this.$el.html(this.template({model: this.model, url: this.config.defaultAPIUrl}));
         this.renderNodesLibrary();
-        this.uploadCustomIngredientsFileListener();
         this.reloadMainWorkflow();
         this.saveSubworkFlowListener();
         this.toggleButtonReload();
@@ -62,6 +61,15 @@ export let MenuView = Backbone.View.extend({
         this.settings = new SettingsView(this.model, this.workspaceGraph, this.$el.find('#workflowNameInput'), this.$el.find('#authorInput'));
         this.settings.setElement(this.$('#settings'));
         this.settings.render();
+
+        if(this.model != null) {
+            let self = this;
+            let nodeId = self.model.cid;
+            // create ingredient tree widget modal
+            let customSettingsAreaModal = new CustomSettingsAreaView(self.model, nodeId);
+            customSettingsAreaModal.setElement(self.$('#customSettingsArea' + nodeId));
+            customSettingsAreaModal.render();                    
+        }
     },
     toggleButtonReload : function() {
         let self = this;
@@ -122,42 +130,6 @@ export let MenuView = Backbone.View.extend({
             }
             // replace current main workflow in the local storage
             localStorage.setItem('mainWorkflow', JSON.stringify(mainWorkflowJSON));
-        });
-    },
-    uploadCustomIngredientsFileListener: function() {
-        // get workspace
-        const workspaceLocal = this.workspaceGraph;
-        // get the custom ingredients from the metadata model
-        let customIngredients = this.model.get('customIngredients');
-
-        this.$el.find('#uploadCustomIngredients').on('change', function() {
-            let files = this.files;
-            // if there are not files then do not continue
-            if (!files || !files.length) {
-                return;
-            }
-            // regex to check if it is indeed a csv file
-            const regex = /^([a-zA-Z0-9\s_\\.\-:])+(.csv)$/;
-
-            // if it has a csv extension then proceed to upload the results
-            if(regex.test($('#uploadCustomIngredients').val().toLowerCase())){
-                let fileReader = new FileReader();
-                // read first file as base64
-                fileReader.readAsDataURL(files[0]);
-                const filename = files[0].name
-                // handle file loading results
-                fileReader.onloadend = () => {
-                    let fileData = fileReader.result;
-                    // create file object
-                    const file = {
-                        filename: filename,
-                        data: fileData
-                    }
-                    // push custom file in 
-                    customIngredients.push(file);
-                    workspaceLocal.get('settings').trigger('change:customIngredients');
-                }
-            }
         });
     },
     renderNodesLibrary: function() {

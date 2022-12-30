@@ -7,3 +7,4 @@ export * from './workspace.jsx';
 export * from './settings.jsx';
 export * from './timetable.jsx';
 export * from './ingredientsTreeView.jsx';
+export * from './customSettingsArea.jsx';
