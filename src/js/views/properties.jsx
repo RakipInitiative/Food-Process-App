@@ -241,6 +241,17 @@ export let PropertiesView = Backbone.View.extend({
             let currentNode = this.currentNode;
             let workspace = this.workspaceGraph;
             let self = this;
+            
+            // backwards compatability with older files
+            if(nodeTypes.INGREDIENTS === currentNode.attributes.properties.get('type')) {
+                const ingredients = propertiesModel.get('ingredients');
+                ingredients.forEach(ingredient => { 
+                    if(ingredient.get('value').length > 0 && ingredient.get('name').length === 0) {
+                        let ingredientName = _.find(self.ingredients, { id: ingredient.get('value') }).name;
+                        ingredient.set('name', ingredientName);
+                    }
+                });
+            }
 
             // re-render if there is a new custom ingredient file
             this.workspaceGraph.get('settings').on('change:customIngredients', function() {

@@ -182,19 +182,25 @@ export let IngredientTreeWidgetView = Backbone.View.extend({
     buildTreeData: function(data, parentData) {
         if(data.hasChildren) {
             data.children.forEach(child => {
-                // push it to the children
-                const categoryData = 
-                {
-                    "text": child.text, 
-                    "id": child.id + '-parent',
-                    "icon" : "fa-solid fa-plus",
-                    "children": [] 
-                };
+                if(child.hasChildren) {
+                    // push it to the children
+                    const categoryData = 
+                    {
+                        "text": child.text, 
+                        "id": child.id + '-parent',
+                        "icon" : "fa-solid fa-plus",
+                        "children": []
+                    };
 
-                // recursively call the data children
-                this.buildTreeData(child, categoryData);
-                // push to the parent
-                parentData.children.push(categoryData);  
+                    // recursively call the data children
+                    this.buildTreeData(child, categoryData);
+                    // push to the parent
+                    parentData.children.push(categoryData);
+                } else {
+                    // recursively call the data children
+                    this.buildTreeData(child, parentData);
+                }
+                  
             });
         } else {
             const ingredients = this.model.get('ingredients').models;
