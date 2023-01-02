@@ -9,7 +9,7 @@
                 <input type="text" id="ingredientAmountInput<%= ingredient.get('id') %>" class="ingredient-amount" placeholder="" aria-describedby="amount" value="<%= ingredient.get('amount') %>" required>
                 <select class="property-unit small" id="ingredientUnitSelect<%= ingredient.get('id') %>">
                     <% _.each(allUnits, function(unitOption) { %>
-                    <option value="<%= ingredient.get('unit') %>"><%= unitOption.name %></option>
+                        <option value="<%= unitOption.id %>"><%= unitOption.name %></option>
                     <% }); %>
                 </select>
             </div>
