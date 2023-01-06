@@ -174,6 +174,10 @@ module.exports = {
                 }
             },
             {
+                test: /\.json$/,
+                type: 'json',
+            },
+            {
                 test: /\.csv$/,
                 use: [
                     {

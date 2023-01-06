@@ -15,8 +15,10 @@ import { FoodProcessNode, IngredientsNode, nodeConfig, MetadataModel, EndNode, M
 import { SettingsView, CustomSettingsAreaView } from './index.jsx';
 
 let configJSON = require('../../../config.json');
+let ingredientsCV = require('../../cv/ingredients.csv');
 
 export let MenuView = Backbone.View.extend({
+    ingredients: [],
     template: _.template(menuTemplate),
     // Render the nodes library in the element with the given selector
     nodesLibraryElementId: 'nodes-library',
@@ -37,6 +39,7 @@ export let MenuView = Backbone.View.extend({
         this.workspaceGraph = workspaceGraph;
         this.workspaceElement = workspaceElement;
         this.workspace = workspace;
+        this.ingredients = ingredientsCV.sort(this.compareByName);
         this.config = configJSON;
 
         let self = this;
@@ -283,7 +286,10 @@ export let MenuView = Backbone.View.extend({
             }
         });
 
-        let blob = new Blob([stringified], {type: "application/json"});
+        // set the label of the ingredients
+        const stringifiedCorrectedIngredientsLabel = this.setExportedIngredientsLabelText(stringified, true);
+
+        let blob = new Blob([stringifiedCorrectedIngredientsLabel], {type: "application/json"});
         let url  = URL.createObjectURL(blob);
         let fileName = (exportJSON.settings.get('workflowName') || 'workflow') + '.json';
         if (platform.name === "Microsoft Edge") {
@@ -307,7 +313,8 @@ export let MenuView = Backbone.View.extend({
             let self = this;
             fileReader.onload = function(event) {
                 let dataFromJSON = JSON.parse(event.target.result);
-                self.workspaceGraph.fromJSON(dataFromJSON);
+                let dataFromJSONCorrectedIngredients = self.setExportedIngredientsLabelText(dataFromJSON, false);
+                self.workspaceGraph.fromJSON(dataFromJSONCorrectedIngredients);
                 self.model = new MetadataModel(dataFromJSON.settings);
                 // if there is an already saved main in the local storage do not load this as main
                 if(!localStorage.getItem('mainWorkflow')) {
@@ -325,6 +332,41 @@ export let MenuView = Backbone.View.extend({
         let lastSaved = moment(this.model.get('lastSaved')).unix() || null;
         let created = moment(this.model.get('created')).unix();
         return (!lastSaved || lastChanged > lastSaved) && lastChanged !== created;
+    },
+    setExportedIngredientsLabelText: function(workspaceAsJson, shouldBeParsed) {
+        if(shouldBeParsed) {
+            workspaceAsJson = JSON.parse(workspaceAsJson);
+        }
+        // loop through cells to find the ingredients
+        for(const cell of workspaceAsJson['cells']) {
+            if(nodeTypes.INGREDIENTS === cell['properties']['type']) {
+                // get ingredients
+                const ingredients = cell['properties']['ingredients'];
+                let ingredientsLabelText = '';
+                // if there are ingredients added then loop through them and set the label
+                if(ingredients.length> 0) {
+                    ingredients.forEach(ingredient => {
+                        if(ingredient['value'].length > 0 && ingredient['name'] === undefined) {
+                            let ingredientName = _.find(this.ingredients, { id: ingredient['value'] }).name;
+                            ingredientsLabelText += ingredientName + '\n';
+                        } else {    
+                            ingredientsLabelText += ingredient['name'] + '\n';
+                        }
+                    });
+                    // set label aspect of the json
+                    cell['attrs']['.label'] = {
+                        "text": ingredientsLabelText,
+                        "ref-y": ingredients.length * -15
+                    }
+                }
+            }
+        }
+        // stringify the object
+        if(shouldBeParsed) {
+            return JSON.stringify(workspaceAsJson);
+        }
+
+        return workspaceAsJson;
     },
     setMetadataModelAndRerender: function(metadataModel) {
         this.model = metadataModel;

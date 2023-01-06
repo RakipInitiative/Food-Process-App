@@ -16,14 +16,13 @@ let endProductTemplate = require('../../templates/end-product.html');
 let subworkflowTemplate = require('../../templates/subworkflow.html');
 let emptyPropertiesTemplate = require('../../templates/empty-properties.html');
 
-import {nodeTypes, ParameterModel, IngredientModel, SubWorkFlow, MetadataModel} from '../models/index.jsx';
+import {nodeTypes, ParameterModel, SubWorkFlow, MetadataModel} from '../models/index.jsx';
 import {TimetableView, IngredientTreeWidgetView} from './index.jsx'
 
 let ingredientsCV = require('../../cv/ingredients.csv');
 let processNamesCV = require('../../cv/processes.csv');
 let parameterNamesCV = require('../../cv/parameters.csv');
 let unitsCV = require('../../cv/units.csv');
-let foodOnIngredientJSON = require('../../json/foodex.json')
 
 export let PropertiesView = Backbone.View.extend({
     ingredients: [],
@@ -227,6 +226,7 @@ export let PropertiesView = Backbone.View.extend({
             // unregister change listener from current ingredients node
             if(this.model.get('ingredients')){
                 this.model && this.model.get('ingredients').off('change:value');
+                this.model && this.model.get('ingredients').off('change:name');
             }
             // unregister change listener from current metanode
             if(this.model.get('metanodeData')){
@@ -243,14 +243,37 @@ export let PropertiesView = Backbone.View.extend({
             let self = this;
             
             // backwards compatability with older files
+            // set name and id properly in order to achieve backward compatability
             if(nodeTypes.INGREDIENTS === currentNode.attributes.properties.get('type')) {
                 const ingredients = propertiesModel.get('ingredients');
                 ingredients.forEach(ingredient => { 
                     if(ingredient.get('value').length > 0 && ingredient.get('name').length === 0) {
                         let ingredientName = _.find(self.ingredients, { id: ingredient.get('value') }).name;
+                        // set name and id for old files
                         ingredient.set('name', ingredientName);
+                        ingredient.set('id', ingredient.get('value'));
                     }
                 });
+            }
+
+            // load the label of the files
+            if(nodeTypes.INGREDIENTS === currentNode.attributes.properties.get('type')) {
+                let ingredientsLabel = '';
+                const ingredients = propertiesModel.get('ingredients');
+                let numberOfIngredients = ingredients.length;
+                ingredients.forEach(ingredient => { 
+                    if(ingredient.get('name')) {
+                        ingredientsLabel +=  ingredient.get('name') + '\n';
+                    }
+                });
+                // set label text
+                currentNode.setName(ingredientsLabel);
+                // each ingedient name needs -15 y offset to appear correctly above the node
+                if(numberOfIngredients > 1) {
+                    currentNode.setLabelOffset(numberOfIngredients * -15);
+                } else {
+                    currentNode.setLabelOffset(-15);
+                }
             }
 
             // re-render if there is a new custom ingredient file
@@ -423,6 +446,7 @@ export let PropertiesView = Backbone.View.extend({
             for(let i=0; i< ingredients.length; i++) {
                 if(ingredients[i].id === ingredientId) {
                     ingredients[i].set('amount', $(this).val());
+                    break;
                 }
             }
         });
@@ -434,6 +458,7 @@ export let PropertiesView = Backbone.View.extend({
             for(let i=0; i< ingredients.length; i++) {
                 if(ingredients[i].id === ingredientId) {
                     ingredients[i].set('unit', $(this).val());
+                    break;
                 }
             }
         });
@@ -601,6 +626,7 @@ export let PropertiesView = Backbone.View.extend({
                     // set file field of the metanode model
                     data.set('file', file);
                     data.set('name', filename);
+                    self.$el.find('#subWorkflowInput').val(filename);
                     // set file name in html
                     self.$el.find('.upload-workflow-download').text(filename);
                     // reveal div

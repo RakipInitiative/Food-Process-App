@@ -39,6 +39,8 @@ require('../scss/main.scss');
 // CSV files
 
 let processesCSV = require('../cv/processes.csv');
+let foodOnIngredientJSON = require('../json/foodex.json')
+
 
 // Templates
 let appTemplate = require('../templates/app.html');
