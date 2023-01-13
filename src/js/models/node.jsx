@@ -140,11 +140,21 @@ joint.shapes.custom.Node = joint.shapes.basic.Rect.extend({
     // Use type 'in' for input and 'out' for output
     removeDefaultPort(type) {
         let portsOfType = _.filter(this.getPorts(), {group: type + 'Ports'});
+        const nodeType = this.get('properties').get('type');
+
         // Minimal number of ports reached
         if (type === 'out' && portsOfType.length <= 0) {
             return;
-        } else if (type === 'in' && portsOfType.length <= 1) {
-            return;
+        } else if (type === 'in') {
+            
+            // don't allow to delete input ports except when there is a metanode
+            if(portsOfType.length <= 1 && nodeTypes.META_NODE !== nodeType) {
+                return;
+            }
+
+            if(portsOfType.length <= 0 && nodeTypes.META_NODE === nodeType) {
+                return;
+            }
         }
         this.removePort(portsOfType[portsOfType.length - 1]);
     },
