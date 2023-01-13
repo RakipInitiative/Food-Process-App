@@ -98,6 +98,7 @@ export let MenuView = Backbone.View.extend({
                     localStorage.removeItem('mainWorkflow');
                 }
                self.render();
+               self.workspace.trigger('blank:pointerup');
             }
         });
     },
@@ -339,24 +340,26 @@ export let MenuView = Backbone.View.extend({
         }
         // loop through cells to find the ingredients
         for(const cell of workspaceAsJson['cells']) {
-            if(nodeTypes.INGREDIENTS === cell['properties']['type']) {
-                // get ingredients
-                const ingredients = cell['properties']['ingredients'];
-                let ingredientsLabelText = '';
-                // if there are ingredients added then loop through them and set the label
-                if(ingredients.length> 0) {
-                    ingredients.forEach(ingredient => {
-                        if(ingredient['value'].length > 0 && ingredient['name'] === undefined) {
-                            let ingredientName = _.find(this.ingredients, { id: ingredient['value'] }).name;
-                            ingredientsLabelText += ingredientName + '\n';
-                        } else {    
-                            ingredientsLabelText += ingredient['name'] + '\n';
+            if(cell['properties']) {
+                if(nodeTypes.INGREDIENTS === cell['properties']['type']) {
+                    // get ingredients
+                    const ingredients = cell['properties']['ingredients'];
+                    let ingredientsLabelText = '';
+                    // if there are ingredients added then loop through them and set the label
+                    if(ingredients.length> 0) {
+                        ingredients.forEach(ingredient => {
+                            if(ingredient['value'].length > 0 && ingredient['name'] === undefined) {
+                                let ingredientName = _.find(this.ingredients, { id: ingredient['value'] }).name;
+                                ingredientsLabelText += ingredientName + '\n';
+                            } else {    
+                                ingredientsLabelText += ingredient['name'] + '\n';
+                            }
+                        });
+                        // set label aspect of the json
+                        cell['attrs']['.label'] = {
+                            "text": ingredientsLabelText,
+                            "ref-y": ingredients.length * -15
                         }
-                    });
-                    // set label aspect of the json
-                    cell['attrs']['.label'] = {
-                        "text": ingredientsLabelText,
-                        "ref-y": ingredients.length * -15
                     }
                 }
             }

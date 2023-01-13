@@ -87,9 +87,11 @@ export let WorkspaceView = Backbone.View.extend({
                 // Deselect currently selected node
                 self.activeNodeView && self.activeNodeView.$el.find('.node-body').removeClass('active');
                 // set the custom ingredients files to this node
-                if(nodeTypes.INGREDIENTS === nodeView.model.get('properties').get('type')) {
-                    const metadaModel = self.workspaceGraph.get('settings');
-                    nodeView.model.get('properties').set('customIngredientFiles', metadaModel.get('customIngredients'));
+                if(nodeView.model.get('properties')) {
+                    if(nodeTypes.INGREDIENTS === nodeView.model.get('properties').get('type')) {
+                        const metadaModel = self.workspaceGraph.get('settings');
+                        nodeView.model.get('properties').set('customIngredientFiles', metadaModel.get('customIngredients'));
+                    }
                 }
                 // Set node element to active
                 nodeView.$el.find('.node-body').addClass('active');
@@ -120,9 +122,43 @@ export let WorkspaceView = Backbone.View.extend({
             }
         });
 
+        // do not allow a cell to go out of bounds
+        this.workspace.on('cell:pointerup', function(nodeView) {
+            // get max workspace width
+            let workspaceWidth = $(self.workspace.el).width();
+
+            if (self.activeNodeView) {
+                if(nodeView.model.get('position')) {
+                    // if it is smaller than zero so going out return it to 0
+                    if(nodeView.model.get('position').x < 0) {
+                        const nodeviewYPosition = nodeView.model.get('position').y;
+                        // reset position of cells
+                        nodeView.model.set('position', 
+                            {
+                                x: 0, 
+                                y: nodeviewYPosition
+                            }
+                        );
+                    }
+
+                    if(nodeView.model.get('position').x >= (workspaceWidth + Math.abs(self.workspace.options.origin.x))) {
+                        const nodeviewYPosition = nodeView.model.get('position').y;
+                        // reset position of cells
+                        // substrack 60px from the general width as 60 is the size of the node
+                        nodeView.model.set('position', 
+                            {
+                                x: workspaceWidth + Math.abs(self.workspace.options.origin.x) - 60, 
+                                y: nodeviewYPosition 
+                            }
+                        );
+                    }
+                }
+            }
+        });
+
         this.workspace.on('blank:pointerup', function() {
             pointerdown = false;
-            
+
             if (self.activeNodeView) {
                 self.activeNodeView.$el.find('.node-body').removeClass('active');
                 self.activeNodeView = null;
@@ -173,10 +209,4 @@ export let WorkspaceView = Backbone.View.extend({
     getWorkspace: function() {
         return this.workspace;
     },
-    resetNodeFocus : function () {
-        console.log('fsfsdf')
-        this.activeNodeView.$el.find('.node-body').removeClass('active');
-        this.activeNodeView = null;
-        this.propertiesView.setCurrentNode(null);
-    }
 });

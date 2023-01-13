@@ -61,7 +61,7 @@ export let IngredientTreeWidgetView = Backbone.View.extend({
     searchIngredientsListener: function() {
         let self = this;
 
-        $('.reveal-overlay').find('.search-ingredient').on('keyup', function() {
+        $('.reveal-overlay').find('.search-ingredient').on('keyup', _.debounce(function() {
             const searchIngredientInput = $(this).val();
             if(searchIngredientInput.length >= 3) {
                 $('.reveal-overlay').find('#ingredientsTree').jstree('search', searchIngredientInput);
@@ -70,9 +70,9 @@ export let IngredientTreeWidgetView = Backbone.View.extend({
             if(searchIngredientInput.length === 0) {
                 $('.reveal-overlay').find('#ingredientsTree').jstree("clear_search");
             }
-        });
+        }, 1000));
 
-        self.$el.find('.search-ingredient').on('keyup', function() {
+        self.$el.find('.search-ingredient').on('keyup',  _.debounce(function() {
             const searchIngredientInput = $(this).val();
             if(searchIngredientInput.length >= 3) {
                 $('.reveal-overlay').find('#ingredientsTree').jstree('search', searchIngredientInput);
@@ -81,7 +81,7 @@ export let IngredientTreeWidgetView = Backbone.View.extend({
             if(searchIngredientInput.length === 0) {
                 $('.reveal-overlay').find('#ingredientsTree').jstree("clear_search");
             }
-        });
+        }, 1000));
     },
     generateCategorizedIngredients : function(ingredients) {
         let catagorizedIngredients = {};
@@ -139,7 +139,11 @@ export let IngredientTreeWidgetView = Backbone.View.extend({
         const defaultIngredients = this.catagorizedIngredients;
         const customFiles = this.model.get('customIngredientFiles');
         let self = this;
-        self.$el.find('#ingredientChoiceSelect').on('change', function(){
+        self.$el.find('#ingredientChoiceSelect').on('change', function() {
+            //clear the search
+            $('.reveal-overlay').find('.search-ingredient').val('');
+            $('.reveal-overlay').find('#ingredientsTree').jstree("clear_search");
+
             // get selection
             const selection = $(this);
             // if selection is the default then load the default urls

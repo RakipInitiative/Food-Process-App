@@ -435,6 +435,10 @@ export let PropertiesView = Backbone.View.extend({
             });
         });
     },
+    setUnitValueListener: function() {
+        let ingredients = this.model.get('ingredients').models;
+        self.$el.find('.ingredientUnitSelect')
+    },
     addAmountAndUnitListener: function() {
         let ingredients = this.model.get('ingredients').models;
         let self = this;

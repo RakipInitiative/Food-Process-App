@@ -7,7 +7,7 @@
             <div class="property-row">
                 <label class="ingredient-name" id="ingredientValueSelect<%= ingredient.id %>" value="<%= ingredient.id %>" title="<%= ingredient.get('name') %>"><%= ingredient.get('name') %></label>
                 <input type="text" id="ingredientAmountInput<%= ingredient.get('id') %>" class="ingredient-amount" placeholder="" aria-describedby="amount" value="<%= ingredient.get('amount') %>" required>
-                <select class="property-unit small" id="ingredientUnitSelect<%= ingredient.get('id') %>">
+                <select class="property-unit small ingredientUnitSelect" id="ingredientUnitSelect<%= ingredient.get('id') %>">
                     <% _.each(allUnits, function(unitOption) { %>
                         <option value="<%= unitOption.id %>"><%= unitOption.name %></option>
                     <% }); %>
