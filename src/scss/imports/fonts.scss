@@ -1,0 +1,15 @@
+$fa-font-path: "~@fortawesome/fontawesome-free/webfonts";
+@import "~@fortawesome/fontawesome-free/scss/fontawesome.scss";
+@import "~@fortawesome/fontawesome-free/scss/solid.scss";
+
+@font-face {
+    font-family: "Open Sans Local";
+    src: url("../fonts/open-sans/OpenSans-Regular.ttf")  format("truetype");
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: "Open Sans Local";
+    src: url("../fonts/open-sans/OpenSans-Bold.ttf")  format("truetype");
+    font-weight: 700;
+}

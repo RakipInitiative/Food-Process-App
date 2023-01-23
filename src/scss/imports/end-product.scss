@@ -1,0 +1,43 @@
+.end-product-area {
+
+    width: 370px;
+    background-color: $sideBackgroundColor;
+    position: relative;
+    z-index: 100;
+    border-left: 1px solid $borderColor;
+    box-shadow: -1px 0 4px $shadowColor;
+
+    display: flex;
+    flex-flow: column nowrap;
+    overflow: auto;
+
+    padding: 1.5em;
+    flex-grow: 1;
+    flex-shrink: 1;
+    overflow: auto;
+    min-height: 100px;
+
+    .end-product-form {
+        margin-bottom: 0.6rem;
+    }
+
+    .end-product-values {
+        display: flex;
+        flex-flow: row nowrap;
+
+        .end-product-name {
+            width: 100px;
+            flex-shrink: 0;
+            margin-bottom: 0;
+        }
+
+        .end-product-input {
+            flex-shrink: 0;
+            height: 2.4375rem;
+            width: calc(100% - 110px);
+            margin-left: -1px;
+
+        }
+
+    }
+}

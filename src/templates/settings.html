@@ -1,0 +1,40 @@
+<div class="reveal settings" id="settingsModal" data-reveal>
+    <h4>Metadata</h4>
+    <button class="close-button" data-close aria-label="Close modal" type="button">
+        <i class="fa fa-times" aria-hidden="true"></i>
+    </button>
+    <br>
+    <form data-abide novalidate>
+        <div class="settings-row">
+            <label class="middle settings-key">Workflow Name</label>
+            <input type="text" class="settings-value" id="settingsWorkflowNameInput" placeholder=""
+                   aria-describedby="process name" required>
+        </div>
+        <div class="settings-row">
+            <label class="middle settings-key">Author</label>
+            <input type="text" class="settings-value" id="settingsAuthorInput" placeholder="" aria-describedby="author"
+                   required>
+        </div>
+        <div class="settings-row">
+            <label class="middle settings-key">Reference</label>
+            <input type="text" class="settings-value" id="settingsReferenceInput" placeholder="" aria-describedby="reference"
+                   required>
+        </div>
+        <div class="settings-row">
+            <label class="middle settings-key">Process detailed description</label>
+            <textarea type="text" class="settings-value" id="settingsDescriptionInput" placeholder=""
+                      aria-describedby="detailed description" rows="3"
+                      required></textarea>
+        </div>
+        <div class="settings-row">
+            <label class="settings-key">Created</label>
+            <span class="settings-value bold" id="settingsCreated"></span>
+        </div>
+        <div class="settings-row">
+            <label class="settings-key">Last changed</label>
+            <span class="settings-value bold" id="settingsLastChange"></span>
+        </div>
+    </form>
+    <div id="metadataSection" class="metadata-section"></div>
+    <button type="button" id="addMetadataButton" class="button expanded last" title="">Add Metadata</button>
+</div>

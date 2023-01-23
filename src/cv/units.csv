@@ -1,0 +1,121 @@
+id;unit;name;category
+1;log10(Anzahl pro g);log10(number of objects per g);Number Content (count/mass)
+2;log10(Anzahl pro 25g);log10(number of objects per 25g);Number Content (count/mass)
+3;log10(Anzahl pro 100g);log10(number of objects per 100g);Number Content (count/mass)
+4;log10(Anzahl pro ml);log10(count per ml);Number Concentration (count/vol)
+5;log10(KBE pro g);log10(colony forming units per g);Number Content (count/mass)
+6;log10(KBE pro 25g);log10(colony forming units per 25g);Number Content (count/mass)
+7;log10(KBE pro 100g);log10(colony forming units per 100g);Number Content (count/mass)
+8;log10(KBE pro ml);log10(colony forming units per ml);Number Concentration (count/vol)
+9;log10(KBE pro cm^2);log10(colony forming units per cm2);Number Aeric (number/area)
+10;log10(PBE pro g);log10(Plaque forming units per g);Number Content (count/mass)
+11;log10(PBE pro 25g);log10(Plaque forming units per 25g);Number Content (count/mass)
+12;log10(PBE pro 100g);log10(Plaque forming units per 100g);Number Content (count/mass)
+13;log10(PBE pro ml);log10(Plaque forming units per ml);Number Concentration (count/vol)
+14;log10(ng pro g);log10(nanogram per gram);Mass Ratio
+15;log10(ng pro ml);log10(nanogram per ml);Mass Concentration
+16;Anzahl pro g;number of objects per g;Number Content (count/mass)
+17;Anzahl pro 25g;number of objects per 25g;Number Content (count/mass)
+18;Anzahl pro 100g;number of objects per 100g;Number Content (count/mass)
+19;Anzahl pro ml;count per ml;Number Concentration (count/vol)
+20;KBE pro g;colony forming units per g;Number Content (count/mass)
+21;KBE pro 25g;colony forming units per 25g;Number Content (count/mass)
+22;KBE pro 100g;colony forming units per 100g;Number Content (count/mass)
+23;KBE pro ml;colony forming units per ml;Number Concentration (count/vol)
+24;KBE pro cm^2;colony forming units per cm2;Number Aeric (number/area)
+25;PBE pro g;Plaque forming units per g;Number Content (count/mass)
+26;PBE pro 25g;Plaque forming units per 25g;Number Content (count/mass)
+27;PBE pro 100g;Plaque forming units per 100g;Number Content (count/mass)
+28;PBE pro ml;Plaque forming units per ml;Number Concentration (count/vol)
+29;ng pro g;nanogram per gram;Mass Ratio
+30;ng pro ml;nanogram per ml;Mass Concentration
+31;%;percent;Arbitrary Fraction
+32;kGy;energy dose;Energy Content
+33;kGy/h;kGy per hour;Energy Content Rate
+34;IU/ml;infectious units per ml;Unknown
+35;ppm;parts per million ;Arbitrary Fraction
+38;µg pro ml;microgram per ml;Mass Concentration
+39;mg pro kg;milligram per kilogram;Mass Ratio
+40;1 Million Pa;Megapascal;Pressure
+41;µg/g;microgram per gram;Mass Ratio
+42;mmol pro g;millimole per gram;Mole Content
+43;Pa;Pascal;Pressure
+45;cm;centimeter;Length
+47;°C;degree Celsius;Temperature
+48;log Anzahl/disk;;Unknown
+49;Anzahl/disk;;Unknown
+50;log10(Sporen/mL);log10(cfu spores / ml);Number Concentration (count/vol)
+51;Sporen/ml;number spores per milliliter;Number Concentration (count/vol)
+52;g/L;gram per liter;Mass Concentration
+53;g/kg;gram per kilogram;Mass Ratio
+54;log10(Sporen/kg);log10(spores units per kg);Number Content (count/mass)
+55;log(N/N0);log10(CFU at t=x) - log10(CFU at t=0) - !! without reference unit (g or ml) !!;Number Difference
+56;log CFU survivor spores;log10 CFU surving spores  - !! without reference unit (g or ml) !!;Number Difference
+57;log10 CFU reduction;log10(CFU control) - log10(CFU sample) - !! without reference unit (g or ml) !!;Number Difference
+58;Reduction (log10 CFU/g);log10(cfu/g control) - log10(cfu/g sample);Number Content Difference
+59;lethality (log10);;Unknown
+60;% Überlebend;percentage survivors from 100% starting population;Number Fraction
+61;ml/m-2/24h;;Unknown
+62;Avg no. of toxic samples/five tested;;Unknown
+63;% Inaktiviert;percentage inactivated from 100% starting population;Number Fraction
+64;log surviving spores;log surviving spores - !! without reference unit (g or ml) !!;Number Difference
+65;Reduction log10(spores/mL);reduction of spores: log10(initial spore concentration) - log10(surviving spore concentration);Number Concentration Difference
+66;log10(Sporen/mL);log10(cfu spores / ml);Number Concentration (count/vol)
+67;log (N0/N);log10(spores at t=0) - log10(spores at t=x) - !! without reference unit (g or ml) !!;Number Difference
+68;Mrad;;Unknown
+69;log surviving fraction;log surviving spores - !! without reference unit (g or ml) !!;Number Difference
+71;log GE/PCR;;Unknown
+72;Gy/min;;Unknown
+73;Reduction log10(cfu/ml);reduction of concentration: log10(control concentration) - log10(sample concentration);Number Concentration Difference
+74;mW/cm^2/s;;Unknown
+75;mg/ml;milligram per milliliter;Mass Concentration
+76;mg/g;milligram per gram;Mass Ratio
+77;% inaktive Sporen;percentage of non-germinating spores from 100% starting population;Number Fraction
+78;Sporen cfu/g;spores per g;Number Content (count/mass)
+79;mg/l;milligram per liter;Mass Concentration
+80;U pro ml;;Unknown
+81;log10(CFU/g);log10(colony forming units per g);Number Content (count/mass)
+82;g;gram;Mass
+83;log10 CFU/slice;;Unknown
+85;log KBE;log10 CFU (count) - without reference unit (g or ml);Number
+86;d;day;Time
+87;µM;;Unknown
+88;genome copies;;Unknown
+89;MLD;;Unknown
+90;KBE/Reaktion;;Unknown
+91;log10((CFU+1)/mL);log10((CFU+1)/ml);Number Concentration (count/vol)
+92;wk;week;Time
+93;Anzahl/0.1 ml;count per 0.1 ml;Number Concentration (count/vol)
+94;µl/ml;microliter pro ml;Volume Ratio
+95;AU/ml;;Unknown
+96;µs²;µs²;Unknown
+97;spores/sample;;Unknown
+98;fg/ml;femptogram per milliliter;Mass Concentration
+99;ng/l;nanogram per liter;Mass Concentration
+103;ln(Anzahl pro g);ln(number of objects per g);Number Content (count/mass)
+104;ln(Anzahl pro ml);ln(count per ml);Number Concentration (count/vol)
+105;pH;pH value;Dimensionless quantity
+106;Bar;bar;Pressure
+107;% wt/wt;% wt/wt;Mass Ratio
+108;% vol/vol;% vol/vol;Volume Ratio
+109;% wt/vol;% wt/vol;Mass Concentration
+110;Kelvin;Kelvin;Temperature
+111;s;second;Time
+112;min;minute;Time
+113;h;hour;Time
+114;[ja/nein];Boolean;True/False Value
+115;aw;Water activity;Dimensionless quantity
+116;m;meter;Length
+117;% vol/wt;% vol/wt;Volume Concentration
+118;mo_j;month - mean Julian;Time
+119;a_j;year - mean Julian;Time
+120;kg;kilogram;Mass
+121;°F;degree Fahrenheit;Temperature
+122;ln KBE;ln CFU (count) - without reference unit (g or ml);Number
+123;KBE;CFU (count) - without reference unit (g or ml);Number
+124;Fluoreszenz;Fluorescence quantum yield;Dimensionless quantity
+125;% Aktiviert;% Activated;Number Fraction
+126;Wahrscheinlichkeit;Probability;Dimensionless quantity
+127;ppb;parts per billion;Arbitrary Fraction
+128;none;no name;Dimensionless quantity
+129;log10(ffu);log10 of focus-forming unit counts - without reference unit (g or ml);Number

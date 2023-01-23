@@ -1,0 +1,9 @@
+<% let customIngredientFiles = model.get('customIngredients') %>
+<% _.each(customIngredientFiles, function (file) { %>
+    <div class="property-row">
+        <label class="custom-ingredient-file" id="<%= file.id %>" value="<%= file.filename %>" title="<%= file.filename %>"><%= file.filename %></label>
+        <button type="button" id="removeCustomIngredientFile-<%= file.id %>" class="alert button removeCustomIngredientFile" title="Remove Subworkflow File">
+            <i class="fa fa-times" aria-hidden="true"></i>
+        </button>
+    </div>
+<% }); %>

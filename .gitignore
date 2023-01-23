@@ -1,0 +1,8 @@
+dist/
+
+.idea/
+node_modules/
+npm-debug.log
+npm-debug.log.*
+README.html
+*.pdf

@@ -1,0 +1,48 @@
+<div class="sub-workflow-area">
+    <h4>Subworkflow</h4>
+    <form class="sub-workflow-form" data-abide novalidate>
+        <% let metanodeData = model.get('metanodeData').models %>
+        <% _.each(metanodeData, function (data) { %>
+        <div class="sub-workflow-values">
+            <label for="subWorkflowInput" class="middle sub-workflow-name">Name</label>
+            <input type="text" value="<%=data.get('name')%>" class="sub-workflow-input" id="subWorkflowInput" placeholder="" aria-describedby="name" required>
+        </div>
+        <div class="upload-workflow-file-area">
+            <div class="uploaded-file-download-area">
+                <a class="upload-workflow-download" download="<%=data.get('file').filename%>" href="<%=data.get('file').data%>" title="Download Workflow File"><%=data.get('file').filename%></a>
+                <button type="button" id="loadWorkflow" class="loadWorkflow button" title="Load Subworkflow">
+                    <i class="fa fa-binoculars" aria-hidden="true"></i>
+                </button>
+                <button type="button" id="downLoadWorkflow" class="downLoadWorkflow button" download="<%=data.get('file').filename%>" href="<%=data.get('file').data%>" title="Download Subworkflow File">
+                    <i class="fa fa-download" aria-hidden="true"></i>
+                </button>
+                <button type="button" id="removeOldWorkflowFile" class="alert button" title="Remove Subworkflow File">
+                    <i class="fa fa-times" aria-hidden="true"></i>
+                </button>
+            </div>
+            <div class="upload-subworkflow-area">
+                <label for="uploadWorkflowJSON" class="button secondary expanded last">
+                    <i class="fa fa-upload" aria-hidden="true"></i> Upload Existing Workflow
+                </label>
+                <input type="file" id="uploadWorkflowJSON" class="show-for-sr">
+            </div>
+        </div>
+        <% }); %>
+    </form>
+</div>
+
+<div class="controls-area">
+    <div class="button-row expanded">
+        <button type="button" id="addInPortButton" class="button" title="Add an input port to the FoodProcess">Add InPort</button>
+        <button type="button" id="removeInPortButton" class="alert button" title="Remove an input port from the FoodProcess">
+            <i class="fa fa-times" aria-hidden="true"></i>
+        </button>
+    </div>
+    <div class="button-row expanded">
+        <button type="button" id="addOutPortButton" class="button" title="Add an output port to the FoodProcess">Add OutPort</button>
+        <button type="button" id="removeOutPortButton" class="alert button" title="Remove an output port from the FoodProcess">
+            <i class="fa fa-times" aria-hidden="true"></i>
+        </button>
+    </div>
+    <button type="button" id="deleteNodeButton" class="alert button expanded last" title="Delete the selected FoodProcess">Delete Node</button>
+</div>

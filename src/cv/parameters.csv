@@ -1,0 +1,47 @@
+name;id;description;category
+ALTA;1;alta fermentation product in the environment;Mass Ratio,Mass Concentration,Volume Ratio,Volume Concentration
+acetic_acid;2;acetic acid (possibly as salt) in the environment;Mass Ratio,Mass Concentration,Volume Ratio,Volume Concentration
+anaerobic;3;anaerobic environment;True/False Value
+ascorbic_acid;4;ascorbic acid (possibly as salt) in the environment;Mass Ratio,Mass Concentration,Volume Ratio,Volume Concentration
+benzoic_acid;5;benzoic acid (possibly as salt) in the environment;Mass Ratio,Mass Concentration,Volume Ratio,Volume Concentration
+citric_acid;6;citric acid (possibly as salt) in the environment;Mass Ratio,Mass Concentration,Volume Ratio,Volume Concentration
+CO_2;7;carbon-dioxide in the environment;Mass Ratio,Mass Concentration,Volume Ratio,Volume Concentration
+competition;8;other species in the environment;Mass Ratio,Mass Concentration,Volume Ratio,Volume Concentration
+cut;9;cut (minced, chopped, ground, etc);True/False Value
+dried;10;dried food;True/False Value
+EDTA;11;ethylenenediaminetetraacetic acid in the environment;Mass Ratio,Mass Concentration,Volume Ratio,Volume Concentration
+ethanol;12;ethanol in the environment;Mass Ratio,Mass Concentration,Volume Ratio,Volume Concentration
+fat;13;fat in the environment;Mass Ratio,Mass Concentration,Volume Ratio,Volume Concentration
+frozen;14;frozen food;True/False Value
+fructose;15;fructose in the environment;Mass Ratio,Mass Concentration,Volume Ratio,Volume Concentration
+glucose;16;glucose in the environment;Mass Ratio,Mass Concentration,Volume Ratio,Volume Concentration
+glycerol;17;glycerol in the environment;Mass Ratio,Mass Concentration,Volume Ratio,Volume Concentration
+HCl;18;hydrochloric acid in the environment;Mass Ratio,Mass Concentration,Volume Ratio,Volume Concentration
+heated;19;inoculation in/on previously heated (cooked, baked, pasteurized, etc) but not sterilised food/medium;True/False Value
+irradiated;20;in an environment that has been irradiated;True/False Value
+irradiation;21;irradiation at constant rate during the observation time;Energy Content Rate
+lactic_acid;22;lactic acid (possibly as salt) in the environment;Mass Ratio,Mass Concentration,Volume Ratio,Volume Concentration
+lactic_bacteria_fermented;23;food fermented by lactic acid bacteria;True/False Value
+Modified_Atmosphere;24;modified atmosphere environment;True/False Value
+malic_acid;25;malic acid in the environment;Mass Ratio,Mass Concentration,Volume Ratio,Volume Concentration
+moisture;26;moisture in the environment;Mass Ratio,Mass Concentration,Volume Ratio,Volume Concentration
+monolaurin;27;glycerol monolaurate (emulsifier) in the environment;Mass Ratio,Mass Concentration,Volume Ratio,Volume Concentration
+N_2;28;nitrogen in the environment;Mass Ratio,Mass Concentration,Volume Ratio,Volume Concentration
+NaCl;29;sodium chloride in the environment;Mass Ratio,Mass Concentration,Volume Ratio,Volume Concentration
+nisin;30;nisin in the environment;Mass Ratio,Mass Concentration,Volume Ratio,Volume Concentration
+nitrite;31;sodium or potassium nitrite in the environment;Mass Ratio,Mass Concentration,Volume Ratio,Volume Concentration
+O_2;32;oxygen (aerobic conditions) in the environment;Mass Ratio,Mass Concentration,Volume Ratio,Volume Concentration
+propionic_acid;33;propionic acid (possibly as salt) in the environment;Mass Ratio,Mass Concentration,Volume Ratio,Volume Concentration
+raw;34;raw;True/False Value
+shaken;35;shaken (agitated, stirred);True/False Value
+smoked;36;smoked food;True/False Value
+sorbic_acid;37;sorbic acid (possibly as salt) in the environment;Mass Ratio,Mass Concentration,Volume Ratio,Volume Concentration
+sterile;38;sterilised before inoculation;True/False Value
+sucrose;39;sucrose in the environment;Mass Ratio,Mass Concentration,Volume Ratio,Volume Concentration
+sugar;40;sugar in the environment;Mass Ratio,Mass Concentration,Volume Ratio,Volume Concentration
+vacuum;41;vacuum-packed;True/False Value
+oregano;42;oregano essential oil in the environment;Mass Ratio,Mass Concentration,Volume Ratio,Volume Concentration
+indigenous_flora;43;with the indigenous flora in the environment (but not counted);True/False Value
+pressure;44;pressure controlled;Pressure
+diacetic_acid;45;in presence of diacetic acid (possibly as salt);True/False Value
+betaine;46;in presence of betaine;True/False Value

@@ -1,0 +1,53 @@
+<div class="settings-area">
+    <img class="bfr-logo" src="../img/bfr-logo.png">
+    <button type="button" id="settingsButton" data-open="settingsModal" class="button expanded settings-button" title="Open settings">
+        <i class="fa fa-cog" aria-hidden="true"></i> Metadata
+    </button>
+    <button type="button" id="customSettingsArea" data-open="customSettings" class="button expanded secondary last" title="Upload a custom ingredients file">
+        <i class="fa fa-leaf" aria-hidden="true"></i>  
+        Settings
+    </button>
+    <form data-abide novalidate>
+        <label>Workflow Name
+            <input type="text" id="workflowNameInput" placeholder="" aria-describedby="name" required>
+        </label>
+        <label>Author
+            <input type="text" id="authorInput" placeholder="" aria-describedby="duration" required>
+        </label>
+    </form>
+</div>
+<div class="nodes-area">
+    <h6>Templates <i class="fa fa-info-circle info-hover" aria-hidden="true" title="Drag nodes to start"></i></h6>
+    <div id="nodes-library" class="nodes-library"></div>
+</div>
+<div class="controls-area">
+    <a type="button" id="sendToAPIButton" class="button secondary expanded" title="Send the model to the API"  data-open="sendToAPIModal">
+        <i class="fa fa-paper-plane" aria-hidden="true"></i> Send to API
+    </a>
+    <a type="button" id="saveButton" class="button secondary expanded" title="Save the model">
+        <i class="fa fa-download" aria-hidden="true"></i> Save
+    </a>
+    <label for="uploadInput" class="button secondary expanded last">
+        <i class="fa fa-upload" aria-hidden="true"></i> Load
+    </label>
+    <input type="file" id="uploadInput" class="show-for-sr">
+    <div class="reloadWorkflowArea">
+        <a type="button" id="reloadWorkflow" class="button secondary" title="Reload Workflow">
+            <i class="fa fa-rotate-right" aria-hidden="true"></i> Back To Parent 
+        </a>
+        <a type="button" id="saveWorkFlowProgress" class="button primary" title="Save changes to Subworkflow">
+            <i class="fa fa-floppy-disk" aria-hidden="true"></i> Save Subworkflow
+        </a>
+    </div>
+</div>
+
+<div id="settings"></div>
+<div id="customSettingsArea<%= model.cid %>"></div>
+<div id="sendToAPIModal" class="reveal" data-reveal>
+    <label>Send the model to the following URL:
+        <input type="text" id="sendToAPIURL" placeholder="" value="<%= url %>" required>
+    </label>
+    <a type="button" id="sendToAPISendButton" class="button expanded" title="Send the model to the API">
+        <i class="fa fa-paper-plane" aria-hidden="true"></i> Send
+    </a>
+</div>

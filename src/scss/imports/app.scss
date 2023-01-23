@@ -1,0 +1,26 @@
+// The layout for the main views of the application is defined in this file. You can find the styling of the views in a separate file for each view.
+.app-wrapper {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: stretch;
+    height: 100vh;
+    overflow-x: auto;
+    overflow-y: hidden;
+}
+
+    .app-menu {
+        flex-grow: 0;
+        flex-shrink: 0;
+    }
+
+    .app-workspace {
+        width: 100%;
+        flex-grow: 1;
+    }
+
+    .app-properties {
+        flex-grow: 0;
+        flex-shrink: 0;
+    }
+
+

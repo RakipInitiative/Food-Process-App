@@ -1,0 +1,66 @@
+<div class="properties-area">
+    <h4>Process</h4>
+    <form class="properties-form" data-abide novalidate>
+        <div class="property-row">
+            <label for="processNameSelect" class="middle property-name">Name</label>
+            <select id="processNameSelect" class="property-name-select"></select>
+        </div>
+        <div class="property-row">
+            <label for="durationInput" class="middle property-name">Duration</label>
+            <input type="number" id="durationInput" placeholder="" aria-describedby="duration" required>
+            <select class="property-unit" id="durationUnitSelect"></select>
+        </div>
+    </form>
+    <h5>Parameter</h5>
+    <form class="properties-form" data-abide novalidate>
+        <% let parameters = model.get('parameters').models %>
+        <% _.each(parameters, function (parameter) { %>
+            <div class="property-row">
+                <% if (parameter.get('optional')) { %>
+                    <select class="property-name" id="parameterNameSelect<%= parameter.get('id') %>">
+                        <% _.each((parameterNames), function(parameterName) { %>
+                        <option value="<%= parameterName.id %>"><%= parameterName.name %></option>
+                        <% }); %>
+                    </select>
+                <% } else { %>
+                    <label class="middle property-name"><%= parameter.get('name') %></label>
+                <% } %>
+                <input type="text" id="parameterInputValue<%= parameter.get('id') %>" placeholder="" aria-describedby="parameter" data-validator="<%= parameter.get('id') %>Validation" required>
+                <% if (parameter.get('unit') !== null) { %>
+                    <select class="property-unit" id="parameterUnitSelect<%= parameter.get('id') %>">
+                        <% _.each((parameter.get('unitOptions') || allUnits), function(unitOption) { %>
+                        <option value="<%= unitOption.id %>"><%= unitOption.unit %></option>
+                        <% }); %>
+                    </select>
+                <% } %>
+                <button type="button" id="addTimeTableParameter" data-open="timetableModal<%= model.cid %><%= parameter.get('id') %>" class="primary button property-button" title="Change value for specific points in time">
+                    <i class="fa-regular fa-clock" aria-hidden="true"></i>
+                </button>
+                <% if (parameter.get('optional')) { %>
+                    <button type="button" id="removeParameter<%= parameter.get('id') %>" class="alert button remove-row-button" title="Remove the timetable parameter">
+                        <i class="fa fa-times" aria-hidden="true"></i>
+                    </button>
+                <% } %>
+            </div>
+            <div id="timetable<%= model.cid %><%= parameter.get('id') %>"></div>
+        <% }); %>
+
+    </form>
+    <button type="button" id="addParameterButton" class="button expanded last" title="">Add Parameter</button>
+</div>
+
+<div class="controls-area">
+    <div class="button-row expanded">
+        <button type="button" id="addInPortButton" class="button" title="Add an input port to the FoodProcess">Add InPort</button>
+        <button type="button" id="removeInPortButton" class="alert button" title="Remove an input port from the FoodProcess">
+            <i class="fa fa-times" aria-hidden="true"></i>
+        </button>
+    </div>
+    <div class="button-row expanded">
+        <button type="button" id="addOutPortButton" class="button" title="Add an output port to the FoodProcess">Add OutPort</button>
+        <button type="button" id="removeOutPortButton" class="alert button" title="Remove an output port from the FoodProcess">
+            <i class="fa fa-times" aria-hidden="true"></i>
+        </button>
+    </div>
+    <button type="button" id="deleteNodeButton" class="alert button expanded last" title="Delete the selected FoodProcess">Delete Node</button>
+</div>
