@@ -9,7 +9,7 @@
     "build.dev": "webpack",
     "docu": "asciidoctorjs -o README.html README.adoc",
     "dev": "webpack serve",
-    "deploy": "aws s3 sync dist/ s3://foodprocessapp"
+    "predeploy": "npm run build"
   },
   "author": "",
   "license": "private",
