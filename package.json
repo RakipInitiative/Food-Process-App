@@ -9,7 +9,8 @@
     "build.dev": "webpack",
     "docu": "asciidoctorjs -o README.html README.adoc",
     "dev": "webpack serve",
-    "predeploy": "npm run build"
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d ./dist"
   },
   "author": "",
   "license": "private",
