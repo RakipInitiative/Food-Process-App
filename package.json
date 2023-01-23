@@ -9,7 +9,7 @@
     "build.dev": "webpack",
     "docu": "asciidoctorjs -o README.html README.adoc",
     "dev": "webpack serve",
-    "deploy": "aws s3 sync dist/ s3://foodprocessapp"
+    "deploy": "gh-pages -d dist"
   },
   "author": "",
   "license": "private",
@@ -54,6 +54,7 @@
     "@babel/preset-env": "^7.20.2",
     "@fortawesome/fontawesome-free": "^6.2.1",
     "autoprefixer": "^10.4.13",
+    "gh-pages": "^5.0.0",
     "html-webpack-plugin": "^5.5.0",
     "postcss-loader": "^7.0.1",
     "webpack": "^5.75.0",
